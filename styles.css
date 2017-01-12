@@ -1,0 +1,19 @@
+.row {
+  max-width: 600px;
+  margin: 0 auto;
+  padding-left: 50px;
+}
+
+.centered {
+  width: 300px;
+  margin: 40px auto;
+}
+
+body {
+  font-family: Tahoma sans-serif;
+  font-size: 16px;
+}
+
+.temperature {
+  font-size: 2em;
+}

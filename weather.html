@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <div class="text-center">
+    <h3>Current Weather Conditions</h3>
+    <h1><span id="city"></span><h1>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 temperature"><span id="temperature"></span>&deg;<span id="temperature-units"></span></div>
+    <div class="col-xs-6">
+      <img alt="weather conditions icon" src="#" id="weather-icon" />
+      <span class="" id="conditions"></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">Humidity: <span id="humidity"></span>%</div>
+    <div class="col-xs-6">Pressure: <span id="pressure"></span></div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">Wind speed: <span id="wind-speed"></span><span id="speed-units"></span></div>
+    <div class="col-xs-6">Direction: <span id="wind-degrees"></span>&deg;</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6" id="description"></div>
+    <div class="col-xs-6"><span id="cloud-cover"></span>% cloud cover</div>
+  </div>
+
+  <div class="row">
+    <div class="centered">
+      <div class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-default" id="celsius" data-units="metric">Celsius</button>
+        <button type="button" class="btn btn-default active" id="fahrenheit" data-units="imperial">Fahrenheit</button>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <hr/>
+    <div class="row">
+      <div class="col-xs-12" id="date-time"></div>
+      <div class="col-xs-12">
+        <span id="name"></span>,
+        <span id="region"></span>,
+        <span id="country"></span>
+      </div>
+    </div>
+  </footer>
+</div>
