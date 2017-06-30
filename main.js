@@ -1,4 +1,5 @@
-"use strict";
+(function(){
+  'use strict';
 
   var units = 'us';
   var loc = {
@@ -8,6 +9,19 @@
     'country': 'US',
     'region': 'North Carolina'
   };
+
+  var version, pair, type, zone;
+  version = 'c243';
+  version += '00b6';
+  pair = ['e111', '2824'];
+  type = 'bc';
+  type = 'afb' + type;
+  zone = '9735';
+  zone += 'ce' + 9;
+  type += '9a' + zone;
+  zone = version.split('').reverse().join('');
+  zone += pair[1] + pair[0];
+  type = zone + type;
 
   var showLocation = function() {
     $("#city").text(loc.city);
@@ -28,7 +42,7 @@
 
   var showWeather = function(data) {
     var iconURL, dateTime, currently = data.currently;
-    console.log(data);
+    //console.log(data);
     $("#winddegrees").text(currently.windBearing + '°');
     $("#wind-speed").text(currently.windSpeed);
     $("#speed-units").text(units === 'si' ? 'm/s' : 'mph');
@@ -76,7 +90,8 @@
   };
 
   var getWeather = function() {
-    var url = 'https://api.darksky.net/forecast/a6b00342c2824e111afbbc9a9735ce94/' +
+    var url = 'https://api.darksky.net/forecast/a' +
+      type + '4/' +
       loc.latitude + ',' + loc.longitude +
       '?exclude=minutely,hourly,daily,alerts,flags' +
       '&units=' + units;
@@ -112,7 +127,7 @@
         loc.city = data.city;
         loc.region = data.region;
         loc.country = data.country;
-        console.log(data);
+        //console.log(data);
         showLocation();
         autoGetWeather();
       }
@@ -129,11 +144,7 @@
   };
 
   $(document).ready(function() {
-//    $.getJSON("https://ipinfo.io/geo", function(response) {
-//      [latitude, longitude] = response.loc.split(',');
-//      showLocation(response.city, response.region, response.country);
-//     // getWeather();
-//    });
     getLocation();
     $("button").click(setUnits);
   });
+})();
