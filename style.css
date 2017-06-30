@@ -10,9 +10,7 @@
 
 #row3 {
   max-width: 500px;
-}
-.centered {
-  margin: 0 auto;
+  text-align: center;
 }
 
 body {
@@ -23,6 +21,14 @@ body {
 
 .temperature {
   font-size: 2em;
+  height: 128px;
+}
+
+.xcentered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .header {
@@ -35,16 +41,15 @@ footer {
 
 #buttons {
   max-width: 200px;
+  margin: 0 auto;
 }
-#left-data {
-  max-width: 180px;
-}
-#right-data {
-  max-width: 200px
-}
+
 .time-place {
   padding: 0 10px;
 }
-.weather-icon, .temperature {
-  padding-right: 50px;
+
+.attribution {
+  font-size: 12px;
+  margin: 30px;
+  text-align: center;
 }

@@ -43,7 +43,7 @@
           </div>
           <div class="panel-body">
             <div class="row text-center" id="row1">
-              <div class="col-xs-6 temperature"><span id="temperature"></span></div>
+              <div class="col-xs-6 temperature"><span id="temperature" class="xcentered"></span></div>
               <div class="col-xs-6 weather-icon">
                 <img alt="weather conditions icon" src="#" id="weather-icon" />
                 <span id="conditions"></span>
@@ -52,17 +52,13 @@
 
             <div class="row" id="row2">
               <div class="col-xs-6">
-                <div class="centered" id="left-data">
-                  <span class="text-left">
-                    Humidity: <span id="humidity"></span>%<br/> Pressure: <span id="pressure"></span>
-                  </span>
+                <div id="left-data">
+                  Humidity: <span id="humidity"></span>%<br/> Pressure: <span id="pressure"></span>
                 </div>
               </div>
               <div class="col-xs-6">
-                <div class="centered" id="right-data">
-                  <span class="text-left">
-                    Wind speed: <span id="wind-speed"></span><span id="speed-units"></span><br/> Direction: <span id="wind-degrees">variable</span>
-                  </span>
+                <div id="right-data">
+                  Wind speed: <span id="wind-speed"></span><span id="speed-units"></span><br/> Direction: <span id="wind-degrees">variable</span>
                 </div>
               </div>
             </div>
@@ -78,10 +74,10 @@
           <div class="panel-footer">
 
             <div class="row">
-              <div class="centered" id="buttons">
-                <div class="btn-group" role="group" aria-label="...">
-                  <button type="button" class="btn btn-default" id="celsius" data-units="metric">Celsius</button>
-                  <button type="button" class="btn btn-default active" id="fahrenheit" data-units="imperial">Fahrenheit</button>
+              <div id="buttons">
+                <div class="btn-group" role="group" aria-label="toggle units">
+                  <button type="button" class="btn btn-default" id="celsius" data-units="si">Celsius</button>
+                  <button type="button" class="btn btn-default active" id="fahrenheit" data-units="us">Fahrenheit</button>
                 </div>
               </div>
             </div>
@@ -89,7 +85,9 @@
         </div>
       </div>
       <footer class="text-center">by Nathan Wilson</footer>
-
+      <div class="attribution text-muted">
+        <div>Icons made by <a href="http://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+      </div>
     </div>
   </body>
 </html>

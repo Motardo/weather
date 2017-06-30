@@ -1,36 +1,53 @@
-(function() {
-  "use strict";
+"use strict";
 
-  var latitude, longitude, units = 'imperial';
+  var units = 'us';
+  var loc = {
+    'latitude': 35.8,
+    'longitude': -78.8,
+    'city': 'Elm City',
+    'country': 'US',
+    'region': 'North Carolina'
+  };
 
-  var showLocation = function(city, region, country) {
-    $("#city").text(city);
-    $("#region").text(region);
-    $("#country").text(country);
+  var showLocation = function() {
+    $("#city").text(loc.city);
+    $("#region").text(loc.region);
+    $("#country").text(loc.country);
+  };
+
+  var autoGetWeather = function () {
+    units = loc.country === "US"? "us": "si";
+    if (loc.country === "US") {
+      units = "us";
+      $("#fahrenheit").trigger("click");
+    } else {
+      units = "si";
+      $("#celsius").trigger("click");
+    }
   };
 
   var showWeather = function(data) {
-    var iconURL, dateTime;
+    var iconURL, dateTime, currently = data.currently;
     console.log(data);
-    $("#wind-degrees").text(data.wind.deg + '°');
-    $("#wind-speed").text(data.wind.speed);
-    $("#speed-units").text(units === 'metric' ? 'm/s' : 'mph');
-    $("#cloud-cover").text(data.clouds.all);
-    $("#name").text(data.name);
-    dateTime = new Date(data.dt * 1000);
+    $("#winddegrees").text(currently.windBearing + '°');
+    $("#wind-speed").text(currently.windSpeed);
+    $("#speed-units").text(units === 'si' ? 'm/s' : 'mph');
+    $("#cloud-cover").text(currently.cloudCover * 100);
+    $("#name").text(currently.name);
+    dateTime = new Date(currently.time * 1000);
     $("#date").text(dateTime.toLocaleDateString());
     $("#time").text(dateTime.toLocaleTimeString());
-    $("#pressure").text(data.main.pressure);
-    $("#temperature").html(getTemperatureHtml(data.main.temp)).css('color', getColor(data.main.temp));
-    $("#humidity").text(Math.round(data.main.humidity));
-    $("#conditions").text(data.weather[0].main);
-    $("#description").text(data.weather[0].description);
-    iconURL = 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png';
+    $("#pressure").text(currently.pressure);
+    $("#temperature").html(getTemperatureHtml(currently.temperature)).css('color', getColor(currently.temperature));
+    $("#humidity").text(Math.round(currently.humidity * 100));
+    //$("#conditions").text(currently.precipProbability * 100);
+    $("#description").text(currently.summary);
+    iconURL = 'icons/' + currently.icon + '.png';
     $("#weather-icon").attr("src", iconURL);
   };
 
   var getTemperatureHtml = function(temperature) {
-    return temperature + '&deg;' + (units === 'metric' ? 'C' : 'F');
+    return temperature + '&deg;' + (units === 'si' ? 'C' : 'F');
   };
 
   var getColor = function(temperature) {
@@ -49,8 +66,7 @@
       '#f60',
       '#f00'
     ]
-
-    if (units === 'metric') {
+    if (units === 'si') {
       temperature = temperature * 9 / 5.0 + 32;
     }
     index = Math.round(temperature / 5.0 - 7);
@@ -60,9 +76,9 @@
   };
 
   var getWeather = function() {
-    var url = 'http://api.openweathermap.org/data/2.5/weather?' +
-      'lat=' + latitude + '&lon=' + longitude +
-      '&appid=a2f1d037f13b14dc44c5d1c0d6bd5d50' +
+    var url = 'https://api.darksky.net/forecast/a6b00342c2824e111afbbc9a9735ce94/' +
+      loc.latitude + ',' + loc.longitude +
+      '?exclude=minutely,hourly,daily,alerts,flags' +
       '&units=' + units;
     $.ajax({
       type: 'GET',
@@ -71,7 +87,7 @@
         format: 'json'
       },
       error: function(xhr, status, error) {
-        alert("Aw snap, couldn't get weather for " + latitude + ", " + longitude);
+        alert("Aw snap, couldn't get weather for " + loc.latitude + ", " + loc.longitude);
       },
       dataType: 'jsonp',
       success: showWeather
@@ -87,16 +103,18 @@
         format: 'json'
       },
       error: function(xhr, status, error) {
-        alert("Aw snap, couldn't get location");
-        console.log(xhr);
-        console.log(status);
-        console.log(error);
+        alert("Unable to get location from ipinfo.io\nUsing default location instead.");
+        showLocation();
+        autoGetWeather();
       },
-      dataType: 'jsonp',
       success: function(data) {
-        [latitude, longitude] = data.loc.split(',');
-        console.log(latitude);
-        console.log(longitude);
+        [loc.latitude, loc.longitude] = data.loc.split(',');
+        loc.city = data.city;
+        loc.region = data.region;
+        loc.country = data.country;
+        console.log(data);
+        showLocation();
+        autoGetWeather();
       }
     });
   };
@@ -104,18 +122,18 @@
   var setUnits = function(e) {
     e.preventDefault();
     units = $(this).data('units');
-    (units === 'metric' ? $("#fahrenheit") : $("#celsius")).removeClass('active');
+    (units === 'si' ? $("#fahrenheit") : $("#celsius")).removeClass('active');
     $(this).addClass('active');
+    $(this).blur();
     getWeather();
   };
 
   $(document).ready(function() {
-    $.getJSON("https://ipinfo.io/geo", function(response) {
-      [latitude, longitude] = response.loc.split(',');
-      showLocation(response.city, response.region, response.country);
-     // getWeather();
-    });
-    //getLocation();
+//    $.getJSON("https://ipinfo.io/geo", function(response) {
+//      [latitude, longitude] = response.loc.split(',');
+//      showLocation(response.city, response.region, response.country);
+//     // getWeather();
+//    });
+    getLocation();
     $("button").click(setUnits);
   });
-}());
