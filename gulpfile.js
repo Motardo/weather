@@ -14,20 +14,20 @@ gulp.task('css', () => {
     .pipe(autoprefixer())
     .pipe(cleanCSS())
     .pipe(rename('style.css'))
-    .pipe(gulp.dest('build'))
+    .pipe(gulp.dest('.'))
     .pipe(connect.reload());
 });
 
 gulp.task('html', () => {
   gulp.src('src/*.pug')
     .pipe(pug({ pretty: true }))
-    .pipe(gulp.dest('build'))
+    .pipe(gulp.dest('.'))
     .pipe(connect.reload());
 });
 
 gulp.task('js', () => {
   gulp.src(['src/*.js', 'lib/*.js'])
-    .pipe(gulp.dest('build'))
+    .pipe(gulp.dest('.'))
     .pipe(connect.reload());
 });
 
@@ -39,7 +39,7 @@ gulp.task('watch', () => {
 
 gulp.task('connect', () => {
   connect.server({
-    root: 'build',
+    root: '.',
     livereload: true,
     open: true,
   });

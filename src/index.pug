@@ -1,0 +1,58 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title Weather
+    link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
+    link(href='style.css', rel='stylesheet')
+    //if IE
+      script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js')
+  body
+    .container-fluid
+      .section.text-center
+        h1
+          <span id='city'></span><small id='time'>determining city...</small>
+      .section
+        .row#row1
+          .col-xs-6.temperature
+            .xycentered
+              span#temperature
+          .col-xs-6.weather-icon
+            img#weather-icon(src='#' alt='current weather condition')
+            span#conditions
+        .row#row2
+          .col-xs-6
+            .div.xcentered
+              .info
+                | Humidity:
+                span#humidity
+              .info
+                | Pressure:
+                span#pressure
+          .col-xs-6
+            .info
+              | Wind Speed:
+              span#wind-speed
+            .info
+              | Direction:
+              span#wind-degrees variable
+        .row#row3
+          .col-xs-12
+            | Sky: <span id="description"></span> with <span id="cloud-cover"></span>% cloud cover
+      .section
+        #buttons
+          .btn-group(role='group' aria-label='toggle units')
+            button.btn.btn-default#celsius(data-units='si') Celsius
+            button.btn.btn-default#fahrenheit(data-units='us') Fahrenheit
+
+      footer.attribution.text-muted
+        <div><p>by Nathan Wilson</p></div>
+        <div>Icons made by <a href="http://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+        .darksky
+          <a href="https://darksky.net/poweredby/"><img src="icons/poweredby123x49.png" height="49" width="129" alt="powered by dark sky"/></a>
+    script(src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=' crossorigin='anonymous')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
+    script(src='main.js')
