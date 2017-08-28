@@ -1,0 +1,34 @@
+{
+  "name": "weather",
+  "version": "0.1.0",
+  "description": "Display current temperature and weather conditions for the users local area.",
+  "main": "main.js",
+  "scripts": {
+    "pug": "pug --pretty <src/index.pug >index.html",
+    "test": "mocha -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Motardo/weather.git"
+  },
+  "keywords": [],
+  "author": "Nathan Wilson <nswilson@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Motardo/weather/issues"
+  },
+  "homepage": "https://github.com/Motardo/weather#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-clean-css": "^3.7.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-pug": "^3.3.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-stylus": "^2.6.0",
+    "gulp-uglify": "^3.0.0",
+    "mocha": "^3.5.0",
+    "should": "^11.2.1"
+  }
+}
